@@ -1,0 +1,12 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "msg",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "new-mailer-js",
+      "connection": "storagealfaeye_STORAGE"
+    }
+  ]
+}
