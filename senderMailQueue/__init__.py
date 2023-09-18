@@ -12,7 +12,7 @@ def process_recipients(email_str):
 
 
 def main(msg: func.QueueMessage) -> None:
-    logging.info(f"Sendinf...")
+    logging.info(f"Sending...")
     try:
         message_body = msg.get_body().decode('utf-8')
         email_data = json.loads(message_body)
