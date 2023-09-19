@@ -14,7 +14,9 @@ def process_recipients(email_str):
 def main(msg: func.QueueMessage) -> None:
     try:
         logging.info(f"Sending...")
-        message_body = msg.get_body().decode('utf-8')
+        message_body = msg.get_body()
+        # logging.info(message_body)
+        message_body = message_body.decode('utf-8')
         client = EmailClient.from_connection_string(connection_string)
         try:
             email_data = json.loads(message_body)
