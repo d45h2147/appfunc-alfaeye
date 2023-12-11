@@ -2,9 +2,13 @@ import logging
 import azure.functions as func
 from azure.communication.email import EmailClient
 import json
+import os
 
-connection_string = "endpoint=https://alfaeyecomunication.unitedstates.communication.azure.com/;accesskey=hzr4gArVwmWc4G7B+CVMxruksrvsJdD2TOvsgU3ziNTpPv2vToa1AVREEjOADodtHxByjdFPwW37kTjLvidDvQ=="
-sender_address = "DoNotReply@8086b202-ac0d-482e-aea0-747914a81b9a.azurecomm.net"
+# connection_string = "endpoint=https://alfaeyecomunication.unitedstates.communication.azure.com/;accesskey=hzr4gArVwmWc4G7B+CVMxruksrvsJdD2TOvsgU3ziNTpPv2vToa1AVREEjOADodtHxByjdFPwW37kTjLvidDvQ=="
+# sender_address = "DoNotReply@8086b202-ac0d-482e-aea0-747914a81b9a.azurecomm.net"
+
+connection_string = os.getenv("KEY_STORAGE_ALFAEYE", "")
+sender_address = os.getenv("SENDER_ADDRESS", "")
 
 
 def process_recipients(email_str):
@@ -15,7 +19,6 @@ def main(msg: func.QueueMessage) -> None:
     try:
         logging.info(f"Sending...")
         message_body = msg.get_body()
-        # logging.info(message_body)
         message_body = message_body.decode('utf-8')
         client = EmailClient.from_connection_string(connection_string)
         try:
